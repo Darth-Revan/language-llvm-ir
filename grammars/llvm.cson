@@ -1,0 +1,186 @@
+# Defines grammar of LLVM's intermediate representation
+'scopeName': 'source.llvm'
+'name': 'LLVM Intermediate Representation'
+'fileTypes': ['ll']
+'patterns': [
+
+    # comments
+    {
+        'match': ';.*$'
+        'name': 'comment.line.llvm'
+    }
+
+    # strings
+    {
+        'begin': '\\"'
+        'end': '\\"'
+        'name': 'string.quoted.double.llvm'
+    }
+
+    # constant values
+    {
+        'match': '\\b([0-9]+)\\b'
+        'name': 'constant.numeric.int.llvm'
+    }
+    {
+        'match': '\\b(true|false|null)\\b'
+        'name': 'constant.language.llvm'
+    }
+
+    # data types
+    {
+        'match': '\\b(i[1-9][0-9]*)\\b'
+        'name': 'storage.type.int.llvm'
+    }
+    {
+        'match': '\\b(half|float|double|fp128|x86_fp80|ppc_fp128)\\b'
+        'name': 'storage.type.float.llvm'
+    }
+    {
+        'match': '(\\*+)'
+        'name': 'storage.type.pointer.llvm'
+    }
+    {
+        'match': '\\b(void|label|x86_mmx|undef|struct)\\b'
+        'name': 'storage.type.special.llvm'
+    }
+
+    function declarations/definitions
+    {
+        'match': '\\b(declare|define)\\b'
+        'name': 'storage.modifier.llvm'
+    }
+
+    # variables and constants
+    {
+        'match': '(%[a-zA-Z0-9\\$\\._][a-zA-Z0-9\\$\\._]*)\\b'
+        'name': 'variable.value.local.llvm'
+    }
+    {
+        'match': '(@[a-zA-Z0-9\\$\\._][a-zA-Z0-9\\$\\._]*)\\b'
+        'name': 'variable.value.global.llvm'
+    }
+    {
+        'match': '(\\![a-zA-Z0-9\\$\\._][a-zA-Z0-9\\$\\._]*)\\b'
+        'name': 'variable.value.metadata.llvm'
+    }
+
+    # assigment operator
+    {
+        'match': '\\='
+        'name': 'keyword.operator.assignment.llvm'
+    }
+
+    # basic block names
+    {
+        'match': '\\b([a-zA-Z\\$\\._][a-zA-Z0-9\\$\\._]*\\:)'
+        'name': 'constant.other.basicblock.llvm'
+    }
+
+    # instrinsics
+    {
+        'match': '(@llvm\\.[a-zA-Z0-9\\$\\._]+)\\b'
+        'name': 'support.function.intrinsic.llvm'
+    }
+
+    # control structures
+    {
+        'match': '\\b(ret|br|switch|indirectbr|invoke|resume|unreachable|catchswitch|catchret|cleanupret)\\b'
+        'name': 'keyword.control.llvm'
+    }
+
+    # binary operations
+    {
+        'match': '\\b(add|fadd|sub|fsub|mul|fmul|udiv|sdiv|fdiv|urem|srem|frem)\\b'
+        'name': 'support.function.binary.llvm'
+    }
+
+    # bitwise operations
+    {
+        'match': '\\b(shl|lshr|ashr|and|or|xor)\\b'
+        'name': 'support.function.bitwise.llvm'
+    }
+
+    # vector operations
+    {
+        'match': '\\b(extractelement|insertelement|shufflevector)\\b'
+        'name': 'support.function.vector.llvm'
+    }
+
+    # aggregate operations
+    {
+        'match': '\\b(extractvalue|insertvalue)\\b'
+        'name': 'support.function.aggregate.llvm'
+    }
+
+    # memory access operations
+    {
+        'match': '\\b(alloca|load|store|fence|cmpxchg|atomicrmw|getelementptr)\\b'
+        'name': 'support.function.memory.llvm'
+    }
+
+    # conversion operations
+    {
+        'match': '\\b(trunc|zext|sext|fptrunc|fpext|fptoui|fptosi|uitofp|sitofp|ptrtoint|inttoptr|bitcast|addrspacecast|to)\\b'
+        'name': 'support.function.conversion.llvm'
+    }
+
+    # other operations
+    {
+        'match': '\\b(icmp|fcmp|phi|select|call|va_arg|landingpad|catchpad|cleanuppad)\\b'
+        'name': 'support.function.others.llvm'
+    }
+
+    # target triple, data layout, etc.
+    {
+        'match': '(target\\sdatalayout|target\\striple|source_filename)\\b'
+        'name': 'storage.modifier.llvm'
+    }
+
+    # diverse modifiers
+    {
+        'match': '\\b(constant|section|external|global|thread_local|private|unnamed_addr|fn|prefix|comdat|personality)\\b'
+        'name': 'support.type.modifiers.llvm'
+    }
+
+    # parameter attributes
+    {
+        'match': '\\b(zeroext|signext|inreg|byval|inalloca|sret|align|noalias|nocapture|nest|returned|nonnull|swiftself|swifterror|inbounds)\\b'
+        'name': 'support.type.parameter.attributes.llvm'
+    }
+    {
+        'match': '\\b(dereferenceable(_or_null)?)\\b'
+        'name': 'support.type.parameter.attributes.llvm'
+    }
+
+    # function attributes
+    {
+        'match': '\\b(alignstack|allocsize|alwaysinline|builtin|cold|convergent|inaccessiblememonly(_or_argmemonly)?|inlinehint|jumptable|minsize|naked|nobuiltin|noduplicate|noimplicitfloat|noinline|nolazybind|noredzone|noreturn|norecurse|nounwind|optnone|optsize|readnone|readonly|writeonly|argmemonly|returns_twice|safestack|sanitize_address|sanitize_memory|sanitize_thread|ssp|sspreq|sspstrong|uwtable|asm)\\b'
+        'name': 'support.type.parameter.attributes.llvm'
+    }
+
+    # atomic memory ordering constraints
+    {
+        'match': '\\b(unordered|monotonic|acquire|release|acq_rel|seq_cst)\\b'
+        'name': 'support.type.memory.constraints.llvm'
+    }
+
+    # function flags
+    {
+        'match': '\\b(nnan|ninf|nsz|arcp|fast|nuw|nsw|exact|atomic|volatile|singlethread)\\b'
+        'name': 'support.type.flags.llvm'
+    }
+
+    # attribute groups
+    {
+        'match': '\\b(attributes\\s#[a-zA-Z0-9\\$\\._]+)\\b'
+        'name': 'variable.value.attribute.llvm'
+    }
+
+    # condition codes for comparisons
+    {
+        'match': '\\b(eq|ne|ugt|uge|ult|ule|sgt|sge|slt|sle|oeq|ogt|olt|ole|one|ord|ueq|une|uno)\\b'
+        'name': 'support.type.condition.code.llvm'
+    }
+
+]

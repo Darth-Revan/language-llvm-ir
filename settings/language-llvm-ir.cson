@@ -1,0 +1,4 @@
+# Add setting for comments
+'.source.llvm':
+    'editor':
+        'commentStart': '; '
