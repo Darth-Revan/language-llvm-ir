@@ -45,7 +45,7 @@
         'name': 'storage.type.special.llvm'
     }
 
-    function declarations/definitions
+    # function declarations/definitions
     {
         'match': '\\b(declare|define)\\b'
         'name': 'storage.modifier.llvm'
