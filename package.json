@@ -1,27 +1,25 @@
 {
   "name": "language-llvm-ir",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Support for LLVM's Intermediate Representation language in Atom",
   "keywords": [
-      "language",
-      "llvm",
-      "ir",
-      "intermediate",
-      "representation",
-      "grammar"
+    "language",
+    "llvm",
+    "ir",
+    "intermediate",
+    "representation",
+    "grammar"
   ],
   "repository": {
-      "type": "git",
-      "url": "https://github.com/Darth-Revan/language-llvm-ir"
+    "type": "git",
+    "url": "https://github.com/Darth-Revan/language-llvm-ir"
   },
   "bugs": {
-      "url": "https://github.com/Darth-Revan/language-llvm-ir/issues"
+    "url": "https://github.com/Darth-Revan/language-llvm-ir/issues"
   },
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
-  "dependencies": {
-
-  }
+  "dependencies": {}
 }
